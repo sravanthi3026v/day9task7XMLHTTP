@@ -9,8 +9,6 @@ let getodd=(arr)=>{
   }
   console.log(getodd([1,2,3,4,5]));
 
-
-  
 myName=data=> {
   data=data.toLowerCase().split(" ");
   for(var i=0;i<data.length;i++){
@@ -20,9 +18,6 @@ return data.join(" ");
   }
 let name="i am sravanthi";
 console.log(myName(name));
-
-
-
 
 sum=(arr)=>{
   let sum=0;
