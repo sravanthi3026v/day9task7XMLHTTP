@@ -1,69 +1,96 @@
-let getodd=(arr)=>{
-  let odd=[];
-  for(let i in arr){
-      if(arr[i]%2!==0){
-          odd.push(arr[i]);
-      }
-  }
-  return odd;
-  }
-  console.log(getodd([1,2,3,4,5]));
+//Get all the countries from Asia continent/region using filter function
+const xhr = new XMLHttpRequest(); 
+xhr.open("GET","https://restcountries.com/v3.1/all") 
+    xhr.send();  
+xhr.responseType = "json";      
+xhr.onload = ()=>{ 
+    var countries = xhr.response;  
+    console.log(countries)
 
-myName=data=> {
-  data=data.toLowerCase().split(" ");
-  for(var i=0;i<data.length;i++){
-    data[i]=data[i].charAt(0).toUpperCase()+data[i].slice(1);
-  }
-return data.join(" ");
-  }
-let name="i am sravanthi";
-console.log(myName(name));
+ var temp=countries.filter((country)=>{
+       if(country.region=="Asia")
+           return country;
+         });
+console.log(temp);
+        }
 
-sum=(arr)=>{
-  let sum=0;
-  for(var i=0;i<arr.length;i++){
-    sum +=arr[i];
-  }
-  return sum;
-}
-console.log(sum([1,2,3,4,5]));
+//get all the countries with a population of less than 2lakhs using filter function
+const xhr = new XMLHttpRequest(); 
+xhr.open("GET","https://restcountries.com/v3.1/all") 
+    xhr.send();  
+xhr.responseType = "json";      
+xhr.onload = ()=>{ 
+    var countries = xhr.response;  
+    console.log(countries)
 
- prime=(arr)=>{
-  let temp=[];
-  for(var i=0;i<arr.length;i++){
-    var flag=true;
-    for(var j=2;j<arr[i];j++){
-      if(arr[i]%j==0){
-        flag=false;
-        break;
-      }
+ var temp=countries.filter((country)=>{
+       if(country.population<200000)
+           return country;
+         });
+         console.log(temp);
+        }
+
+//print the fallowing detailes name,capital,flag using forEach function.
+
+const xhr = new XMLHttpRequest(); 
+xhr.open("GET","https://restcountries.com/v3.1/all") 
+    xhr.send();  
+xhr.responseType = "json";      
+xhr.onload = ()=>{ 
+    var countries = xhr.response;  
+    console.log(countries)
+
+ var temp=countries.filter((country)=>{
+   countries.forEach((country)=>{
+   console.log(`${country.name.common}`);
+      console.log(`${country.capital}`);
+      console.log(`${country.flag}`);
+   });
+       });
+       }
+
+//print the total population of countries using reduce function
+const xhr = new XMLHttpRequest(); 
+xhr.open("GET","https://restcountries.com/v3.1/all") 
+    xhr.send();  
+xhr.responseType = "json";      
+xhr.onload = ()=>{ 
+    var countries = xhr.response;  
+    console.log(countries)
+    let sum = countries.reduce(function (previousValue, currentValue) {
+    return previousValue + currentValue.population;
+    }, 0)     
+    console.log(sum)
     }
-    if(flag==true){
-      temp.push(arr[i]);
-    }
-  }
-  return temp.join(" ");
-}
-console.log(prime([3,4,5,6,7,8,9,10,11,12,13,14,15]));
 
-palindrome=(arr) => {
-  var temp=[];
-  for(var i=0;i<arr.length;i++){
-    var s=arr[i];
-    var flag=true;
-    var j=0;
-    var k=s.length-1;
-    while(j<k){
-if(s[j++]==s[k--])
-continue;
-else{
-  flag=false;
-  break;
-}
-}
-if(flag==true)
-temp.push(arr[i]);
-    }
-    return temp;
+// print the country which uses us dollars as currency
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all");
+
+xhr.onload = function () {
+
+  if (xhr.status >=0 && xhr.status < 300) {
+    let countries = JSON.parse(this.response);
+
+    let filtered = countries.filter(function (country) {
+      return country.currencies?.hasOwnProperty('USD')
+    });
+    console.log(filtered)
+    filtered.map(country => {
+      console.log('country name', country.name.common)
+    })
   }
-  console.log(palindrome(["car", "racecar", "12321"]));
+};
+
+xhr.send()
+
+
+
+
+
+
+
+
+
+
+
